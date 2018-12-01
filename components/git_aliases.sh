@@ -8,6 +8,7 @@ alias b='git branch'
 alias bb="git branch | grep \* | cut -d ' ' -f2" # print the current branch
 alias lc="git log -1 --format='%h' | pbcopy && pbpaste" # get length 7 commit hash for github
 
+# Git push + set upstream branch if needed
 function p () {
     output=$(git push "$@" 2>&1)
     echo "$output" # for user info
