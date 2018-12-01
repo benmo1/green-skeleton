@@ -2,7 +2,7 @@
 
 # General
 alias bvim='vim ~/.bashrc && . ~/.bashrc'
-alias hvim='vim /etc/hosts'
+alias hvim='sudo vim /etc/hosts'
 alias svim='vim ~/.ssh/config'
 
 # Make an alias to cd to the current directory
