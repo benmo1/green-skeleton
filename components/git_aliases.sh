@@ -4,6 +4,7 @@
 alias s='git status'
 alias ds='git diff --staged'
 alias co='git checkout'
+alias b='git branch'
 alias bb="git branch | grep \* | cut -d ' ' -f2" # print the current branch
 alias lc="git log -1 --format='%h' | pbcopy && pbpaste" # get length 7 commit hash for github
 
