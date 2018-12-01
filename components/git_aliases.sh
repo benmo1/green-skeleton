@@ -32,7 +32,7 @@ function go () {
     count=`echo $branches | tr ' ' '\n' | wc -l`;
 
     if [[ $count -gt 1 ]] ; then
-        echo 'Please refine your search, more than one branch matched: '
+        echo 'Please refine your search, more than one branch matched:'
         echo $branches | tr ' ' '\n'
     else
         git checkout $branches
