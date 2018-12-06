@@ -41,3 +41,20 @@ function go () {
 
     return
 }
+
+# Merge into current branch no fast forward
+function m() {
+    branches=`git branch -r | grep -v "origin/$(bb)" | awk '{$1=$1};1' | grep ${1-''}`;
+
+    echo "Pick a branch to merge into this one:"
+    select b in $branches; do
+        if [ -n "$b" ] ; then
+            break
+        fi
+    done
+
+    echo 'Merging...'
+    echo "git merge --no-ff \"$b\"" | source /dev/stdin
+
+    return
+}
