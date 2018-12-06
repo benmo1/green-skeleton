@@ -54,7 +54,7 @@ function m() {
     done
 
     echo 'Merging...'
-    echo "git merge --no-ff \"$b\"" | source /dev/stdin
+    git merge --no-ff "$b"
 
     return
 }
