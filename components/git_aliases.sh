@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Git
+alias f='git fetch -p'
 alias s='git status'
 alias ds='git diff --staged'
 alias co='git checkout'
