@@ -1,5 +1,7 @@
 #!/usr/bin/env
 
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/header.sh
+
 # Vagrant
 alias vu='vagrant up'
 alias vh='vagrant halt'

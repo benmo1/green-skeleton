@@ -44,7 +44,9 @@ for file in $components ;
 do
     destination=~/.bm_bash/"$file"
     cp "$COMPONENT_DIR"/"$file" "$destination"
-    append_onto_bashrc_once $destination
+    if [[ $file != "header.sh" ]] ; then
+        append_onto_bashrc_once $destination
+    fi
 done
 
 . ~/.bashrc

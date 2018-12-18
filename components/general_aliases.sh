@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/header.sh
+
 # General
 alias bvim='vim ~/.bashrc && . ~/.bashrc'
 alias hvim='sudo vim /etc/hosts'

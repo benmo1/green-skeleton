@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/header.sh
+
 # Git
 alias f='git fetch -p'
 alias s='git status'

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/header.sh
+
 config_file=~/.ssh/config
 
 # ssh by grepping the default config file
@@ -25,3 +27,14 @@ function +ssh () {
 
     ssh "$h"
 }
+
+if is_mac ; then
+    # Coloured ssh
+    function cssh () {
+        PROFILE="Basic" # Profile name while sshed
+        DEFAULT="Pro" # Default profile name
+        echo "tell app \"Terminal\" to set current settings of first window to settings set \"${PROFILE}\"" | osascript
+        ssh $1 $2
+        echo "tell app \"Terminal\" to set current settings of first window to settings set \"${DEFAULT}\"" | osascript
+    }
+fi
