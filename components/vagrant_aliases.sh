@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 
 . $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/header.sh
 
