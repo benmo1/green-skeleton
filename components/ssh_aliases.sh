@@ -25,7 +25,11 @@ function +ssh () {
         fi
     done
 
-    ssh "$h"
+    if [[ -n `declare -f cssh` ]] ; then
+        cssh "$h"
+    else
+        ssh "$h"
+    fi
 }
 
 if is_mac ; then
