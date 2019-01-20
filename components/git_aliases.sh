@@ -2,16 +2,24 @@
 
 . $( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/header.sh
 
+GIT_HIST_DIR=~
+GIT_HIST_FILE=.gs_git_hist # Location to store recent branch checkouts
+GIT_HIST_SHOW=7 # Number of recently checked out branches to show
+
+if ! [[ -d GIT_HIST_DIR ]] ; then
+    mkdir -p $GIT_HIST_DIR;
+fi
+
 # Git
 alias f='git fetch -p'
 alias s='git status'
 alias ds='git diff --staged'
-alias co='git checkout'
 alias b='git branch'
 alias bb="git branch | grep \* | cut -d ' ' -f2" # print the current branch
 alias lc="git rev-list HEAD -1 | pbcopy && pbpaste" # get full commit hash
 alias lcs="git rev-list HEAD -1 | cut -c1-7 | pbcopy && pbpaste" # get 7 character commit hash for git hub
 alias pl="git pull"
+alias nearest_git_repo="git rev-parse --show-toplevel"
 
 # Git push + set upstream branch if needed
 function p () {
@@ -62,4 +70,23 @@ function m() {
     git merge --no-ff "$b"
 
     return
+}
+
+# Track branch changes when doing git checkout
+# This enables ghist to show recently checkout branches
+function co() {
+    checkout_line=`git checkout $* 2>&1 | egrep "Switched to.*branch.*'.*'"`; # first * caters for new branches
+    branch=`echo ${checkout_line##*' '} | cut -d"'" -f2`; # last item on the line, remove the enclosing quotes
+    git_repo=`nearest_git_repo`;
+    echo "$git_repo $branch" >> $GIT_HIST_DIR/$GIT_HIST_FILE;
+}
+
+# Show recently checkout out branches
+function ghist() {
+    git_repo=`nearest_git_repo`;
+    tail -n150 $GIT_HIST_DIR/$GIT_HIST_FILE |
+                           grep "$git_repo" |
+                             cut -d' ' -f 2 |
+                             awk '!x[$0]++' | # This removes duplicates without sorting
+                      tail -rn$GIT_HIST_SHOW;
 }
