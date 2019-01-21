@@ -5,7 +5,7 @@
 config_file=~/.ssh/config
 
 # ssh by grepping the default config file
-function +ssh () {
+function sssh () {
     if ! [[ -f $config_file ]] ; then
         echo "$config_file not found!"
         return
