@@ -2,7 +2,7 @@ This is my environment.
 
 To build, run:
 
-`bash build.sh`
+`. ./build.sh`
 
 This will copy the aliases from components/ into ~/.bm_bash and source them individually in your ~/.bashrc.
 
