@@ -16,12 +16,12 @@ function append_onto_bashrc_once() {
 
 # make sure relevant bash files / folders are present
 
-if ! [[ -e ~/.bash_profile ]] ; then
+if ! [[ -e "$BUILD_DIR"/.bash_profile ]] ; then
     echo "Creating blank $BUILD_DIR/.bash_profile ..."
     touch "$BUILD_DIR"/.bash_profile
 fi
 
-if ! [[ -e ~/.bashrc ]] ; then
+if ! [[ -e "$BUILD_DIR"/.bashrc ]] ; then
     echo "Creating blank $BUILD_DIR/.bashrc ..."
     touch "$BUILD_DIR"/.bashrc
 fi
