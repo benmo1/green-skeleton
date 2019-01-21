@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-. ./build.vars.sh
+# inputs / defaults
+
+BUILD_DIR=${1:-~}
+COMPONENT_DIR=${2:-./components}
+
+# helper functions
 
 function append_onto_bashrc_once() {
     match=`grep ". $1" "$BUILD_DIR"/.bashrc`
