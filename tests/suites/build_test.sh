@@ -9,12 +9,12 @@ testBuild() {
 }
 
 setup() {
-    rm -rf $TEMP_DIR/
+    rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
 }
 
 tearDown() {
-    rm -rf $TEMP_DIR/
+    rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
 }
 
