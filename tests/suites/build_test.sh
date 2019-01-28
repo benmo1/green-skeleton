@@ -5,7 +5,7 @@ DIST_PROFILE="$TEMP_DIR"/.bash_profile
 DIST_RC="$TEMP_DIR"/.bashrc
 
 testBuild() {
-    . ../build.sh ./temp/ ../components/
+    . "$ROOT_DIR"/build.sh "$TEMP_DIR" "$ROOT_DIR"/components/
 }
 
 setup() {
