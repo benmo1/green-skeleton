@@ -8,7 +8,7 @@ runBuildScript() {
     . "$ROOT_DIR"/build.sh "$TEMP_DIR" "$ROOT_DIR"/components/
 }
 
-setup() {
+setUp() {
     echo 'setup'
     rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
