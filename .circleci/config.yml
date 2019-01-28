@@ -3,5 +3,6 @@ jobs:
     docker:
       - image: centos:latest
     steps:
+      - checkout
       - run:
-          command: find .
+          command: ./tests/run.sh
