@@ -8,4 +8,14 @@ export TEMP_DIR="$TEST_DIR"/temp/
 
 cd "$TEST_DIR" # default paths in test suite relative to test root
 
-find ./suites/ -name *_test.sh -exec $TEST_DIR/lib/shunit2 {} \;
+tests=`find ./suites/ -name *_test.sh`
+
+status=0
+for t in $tests ; do
+    "$TEST_DIR"/lib/shunit2 $t
+    if [ $? -eq 1 ] ; then
+        status=1
+    fi
+done
+
+exit $status
