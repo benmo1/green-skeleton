@@ -9,11 +9,13 @@ runBuildScript() {
 }
 
 setup() {
+    echo 'setup'
     rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
 }
 
 tearDown() {
+    echo 'teardown'
     rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
 }
