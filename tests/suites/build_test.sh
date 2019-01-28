@@ -4,7 +4,7 @@ DIST_COMPONENT_DIR="$TEMP_DIR"/.bm_bash/
 DIST_PROFILE="$TEMP_DIR"/.bash_profile
 DIST_RC="$TEMP_DIR"/.bashrc
 
-testBuild() {
+runBuildScript() {
     . "$ROOT_DIR"/build.sh "$TEMP_DIR" "$ROOT_DIR"/components/
 }
 
@@ -19,18 +19,18 @@ tearDown() {
 }
 
 testBuildCreatesExpectedFiles() {
-    testBuild
+    runBuildScript
 
     assertTrue '.bash_profile was created' "[ -f $DIST_PROFILE ]"
     assertTrue '.bashrc was created' "[ -f $DIST_PROFILE ]"
     assertTrue '.bm_bash/ was created' "[ -d $DIST_COMPONENT_DIR ]"
     components=`ls -R "$ROOT_DIR"/components/`
     dist_components=`ls -R "$DIST_COMPONENT_DIR"`
-    assertEquals 'components were created' "$components" "$dist_components"
+    assertEquals 'components were created' "$component" "$dist_components"
 }
 
 testBuildReferencesAllDistComponentsInBashRc() {
-    testBuild
+    runBuildScript
 
     dist_components=`find "$DIST_COMPONENT_DIR" -type f -exec basename {} \; | grep -v 'header.sh'` # file names with no paths
     echo $dist_components
@@ -51,7 +51,7 @@ testBuildDoesNotChangeExistingBashProfileContent() {
     profile="$TEMP_DIR"/.bash_profile
     echo "$content_before" >> "$profile"
 
-    testBuild
+    runBuildScript
 
     content_after=`cat "$profile"`
     assertContains '.bash_profile was not overwritten' "$content_after" "$content_before"
@@ -62,16 +62,16 @@ testBuildDoesNotChangeExistingBashRcContent() {
     rc="$TEMP_DIR"/.bashrc
     echo "$content_before" >> "$rc"
 
-    testBuild
+    runBuildScript
 
     content_after=`cat "$rc"`
     assertContains '.bashrc was not overwritten' "$content_after" "$content_before"
 }
 
 testBuildIsIdempotent() {
-    testBuild
+    runBuildScript
     before=`find "$TEMP_DIR" -type f -exec md5 {} \; | sort -k 2 | md5` # directory fingerprint
-    testBuild
+    runBuildScript
     after=`find "$TEMP_DIR" -type f -exec md5 {} \; | sort -k 2 | md5` # directory fingerprint
 
     assertEquals 'The build results in the same components when run twice' "$before" "$after"
