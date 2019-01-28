@@ -1,0 +1,7 @@
+jobs:
+  build:
+    docker:
+      - image: centos:latest
+    steps:
+      - run:
+          command: ./tests/run.sh
