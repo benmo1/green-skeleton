@@ -13,8 +13,8 @@ tests=`find ./suites/ -name *_test.sh`
 status=0
 for t in $tests ; do
     "$TEST_DIR"/lib/shunit2 $t
-    if [ $? -eq 1 ] ; then
-        status=1
+    if [ $? != 0 ] ; then
+        status=code
     fi
 done
 
