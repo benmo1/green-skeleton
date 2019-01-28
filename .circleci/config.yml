@@ -6,5 +6,4 @@ jobs:
       - checkout
       - run:
           command: |
-            set -e
             bash ./tests/run.sh
