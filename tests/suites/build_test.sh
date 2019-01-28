@@ -28,7 +28,7 @@ testBuildCreatesExpectedFiles() {
     assertTrue '.bm_bash/ was created' "[ -d $DIST_COMPONENT_DIR ]"
     components=`ls -R "$ROOT_DIR"/components/`
     dist_components=`ls -R "$DIST_COMPONENT_DIR"`
-    assertEquals 'components were created' "$component" "$dist_components"
+    assertEquals 'components were created' "$components" "$dist_components"
 }
 
 testBuildReferencesAllDistComponentsInBashRc() {
