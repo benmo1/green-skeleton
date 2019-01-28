@@ -4,7 +4,7 @@
 
 export TEST_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )
 export ROOT_DIR="$TEST_DIR"/../
-export TEMP_DIR="$TEST_DIR"/temp/
+export TEMP_DIR=/tmp/gs_test/
 
 cd "$TEST_DIR" # default paths in test suite relative to test root
 
