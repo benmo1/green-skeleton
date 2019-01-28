@@ -14,7 +14,7 @@ status=0
 for t in $tests ; do
     "$TEST_DIR"/lib/shunit2 $t
     if [ $? != 0 ] ; then
-        status=code
+        status=1
     fi
 done
 
