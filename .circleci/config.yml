@@ -4,4 +4,4 @@ jobs:
       - image: centos:latest
     steps:
       - run:
-          command: ./tests/run.sh
+          command: ../tests/run.sh
