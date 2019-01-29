@@ -52,7 +52,7 @@ testBuildReferencesAllDistComponentsInBashRc() {
 }
 
 testBuildDoesNotChangeExistingBashProfileContent() {
-    content_before='TEST CONTENTS'
+    content_before='alias foo="echo 1"'
     profile="$TEMP_DIR"/.bash_profile
     echo "$content_before" >> "$profile"
 
@@ -63,7 +63,7 @@ testBuildDoesNotChangeExistingBashProfileContent() {
 }
 
 testBuildDoesNotChangeExistingBashRcContent() {
-    content_before='TEST CONTENTS'
+    content_before='alias foo="echo 1"'
     rc="$TEMP_DIR"/.bashrc
     echo "$content_before" >> "$rc"
 
