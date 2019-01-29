@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
+if [[ `uname -s` == 'Linux' ]] ; then
+    md5tool='md5sum'
+elif [[ `uname -s` == 'Darwin' ]] ; then
+    md5tool='md5'
+fi
+
 DIST_COMPONENT_DIR="$TEMP_DIR"/.bm_bash/
 DIST_PROFILE="$TEMP_DIR"/.bash_profile
 DIST_RC="$TEMP_DIR"/.bashrc
 
-testBuild() {
-    . ../build.sh ./temp/ ../components/
+runBuildScript() {
+    . "$ROOT_DIR"/build.sh "$TEMP_DIR" "$ROOT_DIR"/components/ 1>/dev/null
 }
 
-setup() {
+setUp() {
     rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
 }
@@ -19,22 +25,21 @@ tearDown() {
 }
 
 testBuildCreatesExpectedFiles() {
-    testBuild
+    runBuildScript
 
     assertTrue '.bash_profile was created' "[ -f $DIST_PROFILE ]"
     assertTrue '.bashrc was created' "[ -f $DIST_PROFILE ]"
     assertTrue '.bm_bash/ was created' "[ -d $DIST_COMPONENT_DIR ]"
-    components=`ls -R "$ROOT_DIR"/components/`
-    dist_components=`ls -R "$DIST_COMPONENT_DIR"`
-    assertEquals 'components were created' "$components" "$dist_components"
+
+    component_diff=`diff $ROOT_DIR/components/ $DIST_COMPONENT_DIR/`
+    assertTrue 'The components have been created' '[ -z "$component_diff" ]'
 }
 
 testBuildReferencesAllDistComponentsInBashRc() {
-    testBuild
+    runBuildScript
 
     dist_components=`find "$DIST_COMPONENT_DIR" -type f -exec basename {} \; | grep -v 'header.sh'` # file names with no paths
-    echo $dist_components
-    cat $DIST_RC
+
     miss=0
     for c in $dist_components
     do
@@ -47,32 +52,32 @@ testBuildReferencesAllDistComponentsInBashRc() {
 }
 
 testBuildDoesNotChangeExistingBashProfileContent() {
-    content_before='TEST CONTENTS'
+    content_before='alias foo="echo 1"'
     profile="$TEMP_DIR"/.bash_profile
     echo "$content_before" >> "$profile"
 
-    testBuild
+    runBuildScript
 
     content_after=`cat "$profile"`
     assertContains '.bash_profile was not overwritten' "$content_after" "$content_before"
 }
 
 testBuildDoesNotChangeExistingBashRcContent() {
-    content_before='TEST CONTENTS'
+    content_before='alias foo="echo 1"'
     rc="$TEMP_DIR"/.bashrc
     echo "$content_before" >> "$rc"
 
-    testBuild
+    runBuildScript
 
     content_after=`cat "$rc"`
     assertContains '.bashrc was not overwritten' "$content_after" "$content_before"
 }
 
 testBuildIsIdempotent() {
-    testBuild
-    before=`find "$TEMP_DIR" -type f -exec md5 {} \; | sort -k 2 | md5` # directory fingerprint
-    testBuild
-    after=`find "$TEMP_DIR" -type f -exec md5 {} \; | sort -k 2 | md5` # directory fingerprint
+    runBuildScript
+    before=`find "$TEMP_DIR" -type f -exec $md5tool {} \; | sort -k 2 | $md5tool` # directory fingerprint
+    runBuildScript
+    after=`find "$TEMP_DIR" -type f -exec $md5tool {} \; | sort -k 2 | $md5tool` # directory fingerprint
 
     assertEquals 'The build results in the same components when run twice' "$before" "$after"
 }
