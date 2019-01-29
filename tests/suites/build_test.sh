@@ -15,13 +15,11 @@ runBuildScript() {
 }
 
 setUp() {
-    echo 'setup'
     rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
 }
 
 tearDown() {
-    echo 'teardown'
     rm -rf $TEMP_DIR/ # rm -rf dir/* does not remove hidden files
     mkdir $TEMP_DIR/
 }
@@ -41,8 +39,7 @@ testBuildReferencesAllDistComponentsInBashRc() {
     runBuildScript
 
     dist_components=`find "$DIST_COMPONENT_DIR" -type f -exec basename {} \; | grep -v 'header.sh'` # file names with no paths
-    echo $dist_components
-    cat $DIST_RC
+
     miss=0
     for c in $dist_components
     do
