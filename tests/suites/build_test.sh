@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-function is_linux () {
-    [[ `uname -s` == 'Linux' ]]
-}
-
-if [[ is_linux ]] ; then
-    alias md5='md5sum'
+if [[ `uname -s` == 'Linux' ]] ; then
+    md5tool='md5sum'
+elif [[ `uname -s` == 'Darwin' ]] ; then
+    md5tool='md5'
 fi
 
 DIST_COMPONENT_DIR="$TEMP_DIR"/.bm_bash/
@@ -80,9 +78,9 @@ testBuildDoesNotChangeExistingBashRcContent() {
 
 testBuildIsIdempotent() {
     runBuildScript
-    before=`find "$TEMP_DIR" -type f -exec md5 {} \; | sort -k 2 | md5` # directory fingerprint
+    before=`find "$TEMP_DIR" -type f -exec $md5tool {} \; | sort -k 2 | $md5tool` # directory fingerprint
     runBuildScript
-    after=`find "$TEMP_DIR" -type f -exec md5 {} \; | sort -k 2 | md5` # directory fingerprint
+    after=`find "$TEMP_DIR" -type f -exec $md5tool {} \; | sort -k 2 | $md5tool` # directory fingerprint
 
     assertEquals 'The build results in the same components when run twice' "$before" "$after"
 }
