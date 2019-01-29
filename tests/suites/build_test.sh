@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+function is_linux () {
+    [[ `uname -s` == 'Linux' ]]
+}
+
+if [[ is_linux ]] ; then
+    alias md5='md5sum'
+fi
+
 DIST_COMPONENT_DIR="$TEMP_DIR"/.bm_bash/
 DIST_PROFILE="$TEMP_DIR"/.bash_profile
 DIST_RC="$TEMP_DIR"/.bashrc
