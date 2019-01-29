@@ -32,9 +32,9 @@ testBuildCreatesExpectedFiles() {
     assertTrue '.bash_profile was created' "[ -f $DIST_PROFILE ]"
     assertTrue '.bashrc was created' "[ -f $DIST_PROFILE ]"
     assertTrue '.bm_bash/ was created' "[ -d $DIST_COMPONENT_DIR ]"
-    components=`ls -R "$ROOT_DIR"/components/`
-    dist_components=`ls -R "$DIST_COMPONENT_DIR"`
-    assertEquals 'components were created' "$components" "$dist_components"
+
+    component_diff=`diff $ROOT_DIR/components/ $DIST_COMPONENT_DIR/`
+    assertTrue 'The components have been created' '[ -z "$component_diff" ]'
 }
 
 testBuildReferencesAllDistComponentsInBashRc() {
