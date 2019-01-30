@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-status=(git --version >/dev/null 2>&1 && echo $?)
+status=`git --version >/dev/null 2>&1 && echo $?`
 if [ "$status" != 0 ] ; then
     sudo yum install git -y
 fi
