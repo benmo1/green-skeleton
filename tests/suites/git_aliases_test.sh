@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+status=(git --version >/dev/null 2>&1 && echo $?)
+if [ "$status" != 0 ] ; then
+    sudo yum install git -y
+fi
+
 LOCAL_REPO="$TEMP_DIR"/local/
 REMOTE_REPO="$TEMP_DIR"/remote/
 
