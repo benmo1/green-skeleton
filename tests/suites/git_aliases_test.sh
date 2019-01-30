@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-status=`git --version >/dev/null 2>&1 && echo $?`
-if [ "$status" != 0 ] ; then
-    yum install git -y
-fi
+(
+    status=`git --version && echo $?`
+    if [ "$status" != 0 ] ; then
+        yum install git -y
+        git config --global user.email "test@test.com"
+        git config --global user.name "Test Name"
+    fi
+) >/dev/null 2>&1
 
 LOCAL_REPO="$TEMP_DIR"/local/
 REMOTE_REPO="$TEMP_DIR"/remote/
