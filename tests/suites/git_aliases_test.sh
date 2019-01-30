@@ -39,7 +39,7 @@ testPCreatesUpstream() {
 
         status=`git rev-parse @{u} 1>/dev/null 2>&1 && echo $?`
         assertEquals 'Branch upstream was set' 0 $status
-    ) >/dev/null 2>&1 # git seems to write to stderr during normal operation, stop test spamming (1)
+    ) # git seems to write to stderr during normal operation, stop test spamming (1)
 }
 
 testPPushesCommit() {
@@ -54,7 +54,7 @@ testPPushesCommit() {
         local_hash=`git rev-parse HEAD`
         remote_hash=`git rev-parse @{u} 2>/dev/null`
         assertEquals 'Commit was pushed to remote' "$local_hash" "$remote_hash"
-    ) >/dev/null 2>&1 # (see 1)
+    ) # (see 1)
 }
 
 testPPushesCommitWithExistingRemote() {
@@ -71,5 +71,5 @@ testPPushesCommitWithExistingRemote() {
         local_hash=`git rev-parse HEAD`
         remote_hash=`git rev-parse @{u} 2>/dev/null`
         assertEquals 'Commit was pushed to remote' "$local_hash" "$remote_hash"
-    ) >/dev/null 2>&1 # (see 1)
+    ) # (see 1)
 }
