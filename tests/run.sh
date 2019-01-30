@@ -2,8 +2,9 @@
 
 # convenience variables
 
-export TEST_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )
+export TEST_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )/
 export ROOT_DIR="$TEST_DIR"/../
+#mytmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
 export TEMP_DIR=/tmp/gs_test/
 
 cd "$TEST_DIR" # default paths in test suite relative to test root
