@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Install git if not present
 (
     status=`git --version && echo $?`
     if [ "$status" != 0 ] ; then
@@ -10,9 +11,11 @@
     fi
 ) >/dev/null 2>&1
 
+# Variables
 LOCAL_REPO="$TEMP_DIR"/local/
 REMOTE_REPO="$TEMP_DIR"/remote/
 
+# Source aliases to test
 . "$ROOT_DIR"/components/git_aliases.sh
 
 setUp() {
