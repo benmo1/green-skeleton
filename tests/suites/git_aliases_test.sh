@@ -24,7 +24,7 @@ setUp() {
            touch README.md &&
                  git add . && git commit -m 'Initial Commit')
         git clone "$REMOTE_REPO"/.git "$LOCAL_REPO"
-    )
+    ) >/dev/null 2>&1
 }
 
 tearDown() {
