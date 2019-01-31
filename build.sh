@@ -4,6 +4,7 @@
 
 BUILD_DIR=${1:-~}
 COMPONENT_DIR=${2:-./components}
+AUTO_BUILD=1
 
 # helper functions
 
@@ -52,5 +53,15 @@ do
 
     append_onto_bashrc_once $destination
 done
+
+# install optional auto build
+
+if [[ $AUTO_BUILD == 1 ]] ; then
+    destination="$BUILD_DIR"/.bm_bash/.auto_build.sh
+    DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )
+    cp "$DIR"/.auto_build_template.sh "$destination"
+    sed -i '.bak' "s|^##GIT_ROOT##$|GIT_ROOT=$DIR|g" "$destination"
+    append_onto_bashrc_once "$destination"
+fi
 
 . "$BUILD_DIR"/.bashrc
