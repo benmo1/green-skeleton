@@ -57,7 +57,12 @@ done
 # install optional auto build
 
 function append_auto_onto_bashrc_once() {
-    sed -i '.bak' "s|^.*$1.*$|(bash $1 &)|g" "$BUILD_DIR"/.bashrc
+    match=`grep "$1" "$BUILD_DIR"/.bashrc`
+    if [[ -z $match ]] ; then
+        echo "(bash $1 &)" >> "$BUILD_DIR"/.bashrc
+    else
+        sed -i "s|.*$1.*|(bash $1 \&)|" "$BUILD_DIR"/.bashrc
+    fi
 }
 
 if [[ $AUTO_BUILD == 1 ]] ; then
