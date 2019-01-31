@@ -11,7 +11,7 @@ touch "$LIMIT"
 touch -A-0010 "$LIMIT" # max once every 10 seconds
 
 if [ "$LIMIT" -nt "$LAST" ]; then
-    (
+    ( (
         cd "$GIT_ROOT"
         before=`git rev-parse HEAD`
         git pull
@@ -19,7 +19,7 @@ if [ "$LIMIT" -nt "$LAST" ]; then
         if [[ $after != $before ]] ; then
             ./build.sh
         fi
-    ) >/dev/null 2>&1 &
+    ) & ) >/dev/null 2>&1
 
     touch "$LAST"
 fi
