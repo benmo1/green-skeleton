@@ -5,4 +5,4 @@ jobs:
     steps:
       - checkout
       - run:
-          command: bash ./tests/run.sh
+          command: ./test.sh

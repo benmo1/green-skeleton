@@ -14,4 +14,4 @@ An empty ~/.bash_profile and ~/.bashrc will be created if they are not present.
 
 To run the test suite
 
-`./tests/run.sh`
+`./test.sh`
