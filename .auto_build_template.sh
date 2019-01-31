@@ -5,7 +5,7 @@
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )
 
 LIMIT="$DIR"/.auto_update_limit
-LAST="$DIR"/.auto_update_limit
+LAST="$DIR"/.auto_update_last
 
 touch "$LIMIT"
 touch -A-0010 "$LIMIT" # max once every 10 seconds
