@@ -11,7 +11,7 @@ DIST_PROFILE="$TEMP_DIR"/.bash_profile
 DIST_RC="$TEMP_DIR"/.bashrc
 
 runBuildScript() {
-    . "$ROOT_DIR"/build.sh "$TEMP_DIR" "$ROOT_DIR"/components/ 1>/dev/null
+    . "$ROOT_DIR"/build.sh 0 "$TEMP_DIR" "$ROOT_DIR"/components/ 1>/dev/null
 }
 
 setUp() {

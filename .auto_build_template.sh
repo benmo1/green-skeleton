@@ -17,7 +17,7 @@ if [ "$LIMIT" -nt "$LAST" ]; then
         git pull
         after=`git rev-parse HEAD`
         if [[ $after != $before ]] ; then
-            ./build.sh
+            ./build.sh 1
         fi
     ) >/dev/null 2>&1
 

@@ -2,9 +2,9 @@
 
 # inputs / defaults
 
-BUILD_DIR=${1:-~}
-COMPONENT_DIR=${2:-./components}
-AUTO_BUILD=1
+AUTO_BUILD=${1:-0}
+BUILD_DIR=${2:-~}
+COMPONENT_DIR=${3:-./components}
 
 # helper functions
 
