@@ -61,7 +61,7 @@ function append_auto_onto_bashrc_once() {
     if [[ -z $match ]] ; then
         echo "(bash $1 &)" >> "$BUILD_DIR"/.bashrc
     else
-        sed -i "s|.*$1.*|(bash $1 \&)|" "$BUILD_DIR"/.bashrc
+        sed -i '.bak' "s|.*$1.*|(bash $1 \&)|" "$BUILD_DIR"/.bashrc
     fi
 }
 
