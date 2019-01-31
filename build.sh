@@ -56,7 +56,7 @@ done
 
 # install optional auto build
 
-function append__auto_onto_bashrc_once() {
+function append_auto_onto_bashrc_once() {
     match=`grep "$1" "$BUILD_DIR"/.bashrc`
     if [[ -z $match ]] ; then
         echo "(bash $1 &)" >> "$BUILD_DIR"/.bashrc
