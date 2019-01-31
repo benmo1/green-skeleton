@@ -13,8 +13,10 @@ touch -A-0010 "$LIMIT" # max once every 10 seconds
 if [ "$LIMIT" -nt "$LAST" ]; then
     (
         cd "$GIT_ROOT"
-        response=`git fetch`
-        if [[ -n $response ]] ; then
+        before=`git rev-parse HEAD`
+        git pull
+        after=`git rev-parse HEAD`
+        if [[ $after != $before ]] ; then
             ./build.sh
         fi
     ) &
