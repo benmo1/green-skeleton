@@ -20,6 +20,7 @@ alias lc="git rev-list HEAD -1 | pbcopy && pbpaste" # get full commit hash
 alias lcs="git rev-list HEAD -1 | cut -c1-7 | pbcopy && pbpaste" # get 7 character commit hash for git hub
 alias pl="git pull"
 alias nearest_git_repo="git rev-parse --show-toplevel"
+alias gc="echo 1"
 
 # Git push + set upstream branch if needed
 function p () {
