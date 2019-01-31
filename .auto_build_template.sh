@@ -19,7 +19,7 @@ if [ "$LIMIT" -nt "$LAST" ]; then
         if [[ $after != $before ]] ; then
             ./build.sh
         fi
-    ) &
+    ) >/dev/null 2>&1 &
 
     touch "$LAST"
 fi
