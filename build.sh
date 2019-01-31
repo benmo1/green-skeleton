@@ -56,12 +56,19 @@ done
 
 # install optional auto build
 
+function append__auto_onto_bashrc_once() {
+    match=`grep "$1" "$BUILD_DIR"/.bashrc`
+    if [[ -z $match ]] ; then
+        echo "(bash $1 &)" >> "$BUILD_DIR"/.bashrc
+    fi
+}
+
 if [[ $AUTO_BUILD == 1 ]] ; then
     destination="$BUILD_DIR"/.bm_bash/.auto_build.sh
     DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )
     cp "$DIR"/.auto_build_template.sh "$destination"
     sed -i '.bak' "s|^##GIT_ROOT##$|GIT_ROOT=$DIR|g" "$destination"
-    append_onto_bashrc_once "$destination"
+    append_auto_onto_bashrc_once "$destination"
 fi
 
 . "$BUILD_DIR"/.bashrc
