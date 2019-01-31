@@ -24,4 +24,6 @@ if [ "$LIMIT" -nt "$LAST" ]; then
     touch "$LAST"
 fi
 
-rm "$LIMIT"
+if [[ -f "$LIMIT" ]] ; then
+    rm "$LIMIT"
+fi
