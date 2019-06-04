@@ -1,8 +1,0 @@
-jobs:
-  build:
-    docker:
-      - image: centos:latest
-    steps:
-      - checkout
-      - run:
-          command: ./test.sh
