@@ -22,3 +22,16 @@ function mkcdalias () {
 
     return
 }
+
+# Decrypt the contents of your clip board with gpg
+function gpg_d_clip() {
+    pbpaste > temp.gpg
+    gpg -d temp.gpg
+    rm -P temp.gpg
+}
+
+function gpg_i_clip() {
+   pbpaste > temp.key
+   gpg --import temp.key
+   rm -P temp.key
+}
