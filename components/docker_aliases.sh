@@ -9,3 +9,8 @@ alias dp='docker ps'
 alias dcu='docker-compose up'
 alias dcd='docker-compose down'
 alias dce='docker-compose exec'
+
+alias dpwsh='docker run -it --rm mcr.microsoft.com/powershell'
+function dpwshf() {
+    docker run -v "$PWD/$1":"/tmp/$1" mcr.microsoft.com/powershell pwsh "/tmp/$1"
+}
