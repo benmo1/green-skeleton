@@ -90,3 +90,9 @@ function ghist() {
                              awk '!x[$0]++' | # This removes duplicates without sorting
                       tail -rn$GIT_HIST_SHOW;
 }
+
+# Tag and push
+function gt() {
+    git tag "$1"
+    git push origin "$1"
+}
