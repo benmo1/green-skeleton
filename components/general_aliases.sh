@@ -35,3 +35,9 @@ function gpg_i_clip() {
    gpg --import temp.key
    rm -P temp.key
 }
+
+function gen_ssc() {
+  openssl genrsa -out tls.key 2048
+  openssl req -new -key tls.key -out server.csr
+  openssl x509 -req -sha256 -days 365 -in server.csr -signkey tls.key -out tls.crt
+}
