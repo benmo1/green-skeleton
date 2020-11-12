@@ -91,6 +91,12 @@ function ghist() {
                       tail -rn$GIT_HIST_SHOW;
 }
 
+# Recent tags
+function rt() {
+    git tag -n --sort=creatordate;
+    git describe --tags;
+}
+
 # Tag and push
 function gt() {
     git tag "$1"
