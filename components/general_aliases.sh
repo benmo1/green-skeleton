@@ -41,3 +41,13 @@ function gen_ssc() {
   openssl req -new -key tls.key -out server.csr
   openssl x509 -req -sha256 -days 365 -in server.csr -signkey tls.key -out tls.crt
 }
+
+function pfxsplit() {
+  if [[ -z "$1" ]] ; then
+    echo "Must specify a file to split! Exiting."
+    return 1;
+  fi
+  infile="$1"
+  openssl pkcs12 -in "$infile"  -nocerts -out key.pem -nodes
+  openssl pkcs12 -in "$infile" -nokeys -out cert.pem
+}
