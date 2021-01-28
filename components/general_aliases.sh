@@ -48,6 +48,6 @@ function pfxsplit() {
     return 1;
   fi
   infile="$1"
-  openssl pkcs12 -in "$infile"  -nocerts -out key.pem -nodes
+  openssl pkcs12 -in "$infile" -nocerts -out key.pem -nodes
   openssl pkcs12 -in "$infile" -nokeys -out cert.pem
 }
