@@ -51,3 +51,6 @@ function pfxsplit() {
   openssl pkcs12 -in "$infile" -nocerts -out key.pem -nodes
   openssl pkcs12 -in "$infile" -nokeys -out cert.pem
 }
+
+alias myip="curl checkip.amazonaws.com | tee -a ~/ips.txt"
+alias cmyip="curl checkip.amazonaws.com | tee -a ~/ips.txt && tail -1 ~/ips.txt | pbcopy"
