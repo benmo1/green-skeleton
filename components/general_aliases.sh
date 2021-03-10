@@ -54,3 +54,4 @@ function pfxsplit() {
 
 alias myip="curl checkip.amazonaws.com | tee -a ~/ips.txt"
 alias cmyip="curl checkip.amazonaws.com | tee -a ~/ips.txt && tail -1 ~/ips.txt | pbcopy"
+alias rider="open -na "Rider.app" --args"
