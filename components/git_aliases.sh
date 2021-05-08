@@ -93,7 +93,7 @@ function ghist() {
 
 # Recent tags
 function rt() {
-    git tag -n --sort=creatordate | tail;
+    git tag -n --sort=creatordate | tail -n 20;
     git describe --tags;
 }
 
