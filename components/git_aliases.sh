@@ -102,3 +102,5 @@ function gt() {
     git tag "$1"
     git push origin "$1"
 }
+
+alias grh="git reset HEAD --hard"
