@@ -25,10 +25,11 @@ alias nearest_git_repo="git rev-parse --show-toplevel"
 function p () {
     output=$(git push "$@" 2>&1)
     echo "$output" # for user info
-    match=`echo "$output" | grep -c 'The current branch .* has no upstream branch'`
+    match=`echo "$output" | grep -c '\--set-upstream'`
     if [[ $match -eq 1 ]] ; then
-        echo 'Found no upstream branch warning, trying to create upstream...'
-        `echo $output | grep -oh 'use .*$' | cut -c5-`
+        echo 'Found no upstream branch warning, trying to create upstream...';
+        push_with_upstream_command=`git push "$@" 2>&1 | grep -oh 'git push .*$'`;
+        $push_with_upstream_command
     fi
 
     return
