@@ -2,7 +2,8 @@
 
 alias dkc='docker kill $(docker ps -q)'
 alias drc='docker rm $(docker ps -a -q)'
-alias dfresh='dkc && drc'
+alias drv='docker volume rm $(docker volume ls -q)'
+alias dfresh='dkc && drc && drv'
 alias dri='docker rmi $(docker images -q)'
 alias dp='docker ps'
 
