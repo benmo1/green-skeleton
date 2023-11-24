@@ -94,7 +94,7 @@ function ghist() {
 
 # Recent tags
 function rt() {
-    git tag -n --sort=creatordate | tail -n 20;
+    git log --grep="into 'master'" --pretty='format:%h %C(yellow)%<(12,trunc)%(describe:tags=true) %C(white)%s' --reverse -10
     git describe --tags;
 }
 
