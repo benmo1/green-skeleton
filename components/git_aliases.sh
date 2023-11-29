@@ -94,14 +94,32 @@ function ghist() {
 
 # Recent tags
 function rt() {
-    git log --grep="into 'master'" --pretty='format:%h %C(yellow)%<(12,trunc)%(describe:tags=true) %C(white)%s' --reverse -10
-    git describe --tags;
+    echo ""
+    git log --pretty='format:%h %C(yellow)%<(12,trunc)%(describe:tags=true) %C(white)%s' -10 --grep="into 'master'" --reverse;
+    echo ""
+    echo "Currently on:"
+    git log --pretty='format:%h %C(yellow)%<(12,trunc)%(describe:tags=true) %C(white)%s' -1;
 }
 
 # Tag and push
-function gt() {
-    git tag "$1"
-    git push origin "$1"
+gt()
+{
+  if [[ -z "$1" || -z "$2" ]]
+  then
+    echo "Please supply a tag name and a commit hash eg: 'gt_rename v1.0.1 A907F2B";
+    exit 1;
+  fi
+
+  if git rev-parse "$TAG" >/dev/null 2>&1
+  then
+    echo "Deleting tag:";
+    git tag -d "$1";
+    git push origin :"$1";
+  fi
+
+  echo "Recreating tag:";
+  git tag "$1" "$2";
+  git push origin "$1"
 }
 
 alias grh="git reset HEAD --hard"
