@@ -60,3 +60,28 @@ alias dr="dotnet run"
 alias yr="yarn run start"
 alias dma="dotnet ef migrations add"
 alias abswag="abp generate-proxy -t ng"
+
+function ctar()
+{
+  if [[ -z "$1" ]]
+  then
+    echo "Please provide a folder to zip, e.g.:"
+    echo "ctar path/to/my_folder/." 
+  fi
+  
+  folder_name_without_slash=$(echo "$1" | sed 's/\/$//g')
+  tar -czvf "$folder_name_without_slash".tgz "$1"
+}
+
+
+function rtar()
+{
+  if [[ -z "$1" ]]
+  then
+    echo "Please provide a tar zip to extract, e.g.:"
+    echo "rtar path/to/my_zip.tgz" 
+  fi
+ 
+  file_name_without_extension=$(echo "$1" | sed 's/\.tgz$//g')
+  tar -xvf "$1" "$file_name_without_extension"
+}
