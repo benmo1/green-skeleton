@@ -85,3 +85,8 @@ function rtar()
   file_name_without_extension=$(echo "$1" | sed 's/\.tgz$//g')
   tar -xvf "$1" "$file_name_without_extension"
 }
+
+function find_files_containing()
+{
+  find . -name '*sql' -exec grep -nl "$1" {} \;
+}
