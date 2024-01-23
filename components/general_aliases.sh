@@ -38,11 +38,18 @@ function gpg_i_clip() {
 
 function gen_ssc() {
   openssl genrsa -out tls.key 2048
-  openssl req -new -key tls.key -out server.csr
-  openssl x509 -req -sha256 -days 365 -in server.csr -signkey tls.key -out tls.crt
+  openssl req -new -key tls.key -out server.csr -noenc
+  openssl x509 -req -sha256 -days 3650 -in server.csr -signkey tls.key -out tls.crt
 }
 
-function pfxsplit() {
+function pem2pfx() {
+  in_key=${1-'tls.key'}
+  in_crt=${2-'tls.crt'}
+  out_crt=${3-'crt.pfx'}
+  openssl pkcs12 -export -inkey "$in_key" -in "$in_crt" -out "$out_crt"
+}
+
+function pfx2pem() {
   if [[ -z "$1" ]] ; then
     echo "Must specify a file to split! Exiting."
     return 1;
@@ -50,6 +57,11 @@ function pfxsplit() {
   infile="$1"
   openssl pkcs12 -in "$infile" -nocerts -out key.pem -nodes
   openssl pkcs12 -in "$infile" -nokeys -out cert.pem
+}
+
+function mactrust() {
+  to_trust=${1-'tls.crt'}
+  sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain "$to_trust"
 }
 
 alias myip="curl checkip.amazonaws.com | tee -a ~/ips.txt"
