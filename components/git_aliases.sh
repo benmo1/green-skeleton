@@ -95,7 +95,7 @@ function ghist() {
 # Recent tags
 function rt() {
     echo ""
-    git log --pretty='format:%h %C(yellow)%<(12,trunc)%(describe:tags=true) %C(white)%s' -10 --grep="into 'master'" --reverse;
+    git log --pretty='format:%h %C(yellow)%<(12,trunc)%(describe:tags=true) %C(white)%s' -20 --grep="into 'master'" --reverse;
     echo ""
     echo "Currently on:"
     git log --pretty='format:%h %C(yellow)%<(12,trunc)%(describe:tags=true) %C(white)%s' -1;
