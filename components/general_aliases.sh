@@ -102,3 +102,5 @@ function find_files_containing()
 {
   find . -name '*sql' -exec grep -nl "$1" {} \;
 }
+
+alias python="python3"
