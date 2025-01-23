@@ -103,4 +103,27 @@ function find_files_containing()
   find . -name '*sql' -exec grep -nl "$1" {} \;
 }
 
+# easy to use python on macos
 alias python="python3"
+
+# don't open cursor in the wrong place
+cursor ()
+{
+    for arg in "$@";
+    do
+        if [ -d "$arg" ] || [[ "$arg" = "." || "$arg" = ".." || "$arg" = "~" ]]; then
+            full_path=$(realpath $arg)/;
+            allowed_paths=(realpath ~/general-dev/);
+            allowed=false;
+            for allowed_path in "${allowed_paths[@]}";
+            do
+                [[ "$full_path" == "$allowed_path"* ]] && allowed=true;
+            done;
+            if [ "$allowed" = false ]; then
+                echo "directory not allowed" && return 1;
+            fi;
+        fi;
+    done;
+    command cursor "$@"
+}
+
