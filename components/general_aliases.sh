@@ -134,6 +134,8 @@ function check_secrets() {
     git status
     echo "Checking git ignore..."
     git check-ignore -v **/**/*
+    echo "Checking tfstate..."
+    find . -name 'terraform.tfstate' -exec cat {} \;
     echo "Checking Python settings..."
     find . -name 'settin*py' -exec cat {} \;
     echo "Checking Appsettings..."
