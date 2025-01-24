@@ -127,3 +127,16 @@ cursor ()
     command cursor "$@"
 }
 
+# check for secrets in a git repo
+function check_secrets() {
+    # Function body goes here
+    echo "Checking git status..."
+    git status
+    echo "Checking git ignore..."
+    git check-ignore -v **/**/*
+    echo "Checking Python settings..."
+    find . -name 'settin*py' -exec cat {} \;
+    echo "Checking Appsettings..."
+    find . -name 'appset*' -exec cat {} \;
+}
+
