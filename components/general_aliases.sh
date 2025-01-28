@@ -103,9 +103,6 @@ function find_files_containing()
   find . -name '*sql' -exec grep -nl "$1" {} \;
 }
 
-# easy to use python on macos
-alias python="python3"
-
 # don't open cursor in the wrong place
 cursor ()
 {
