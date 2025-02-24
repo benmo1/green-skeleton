@@ -139,3 +139,7 @@ function check_secrets() {
     find . -name 'appset*' -exec cat {} \;
 }
 
+# activate poetry env
+function poactivate() {
+    . $(poetry env info | grep Path | head -1 | egrep -o '\/.*$')/bin/activate
+}
