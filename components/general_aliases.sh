@@ -143,3 +143,10 @@ function check_secrets() {
 function poactivate() {
     . $(poetry env info | grep Path | head -1 | egrep -o '\/.*$')/bin/activate
 }
+
+# stub update function for macos environments where not present
+if ! declare -f update_terminal_cwd > /dev/null; then
+    update_terminal_cwd() {
+        :
+    }
+fi
