@@ -7,22 +7,6 @@ alias bvim='vim ~/.bashrc && . ~/.bashrc'
 alias hvim='sudo vim /etc/hosts'
 alias svim='vim ~/.ssh/config'
 
-# Make an alias to cd to the current directory
-function mkcdalias () {
-    dirname=`pwd | ggrep -E -oh '[^\/\0]+$'`
-    aliasname="cd$dirname"
-    occurances=`grep -c "alias $aliasname" ~/.bashrc`
-    if [[ $occurances -gt "0" ]] ; then
-        echo -e "Alias $aliasname already exists"'!'
-    else
-        echo -e "Alias $aliasname created"'!'
-        echo "alias $aliasname='cd $PWD'" >> ~/.bashrc
-        . ~/.bashrc
-    fi
-
-    return
-}
-
 # Decrypt the contents of your clip board with gpg
 function gpg_d_clip() {
     pbpaste > temp.gpg
@@ -96,52 +80,6 @@ function rtar()
  
   file_name_without_extension=$(echo "$1" | sed 's/\.tgz$//g')
   tar -xvf "$1" "$file_name_without_extension"
-}
-
-function find_files_containing()
-{
-  find . -name '*sql' -exec grep -nl "$1" {} \;
-}
-
-# don't open cursor in the wrong place
-cursor ()
-{
-    for arg in "$@";
-    do
-        if [ -d "$arg" ] || [[ "$arg" = "." || "$arg" = ".." || "$arg" = "~" ]]; then
-            full_path=$(realpath $arg)/;
-            allowed_paths=(realpath ~/general-dev/);
-            allowed=false;
-            for allowed_path in "${allowed_paths[@]}";
-            do
-                [[ "$full_path" == "$allowed_path"* ]] && allowed=true;
-            done;
-            if [ "$allowed" = false ]; then
-                echo "directory not allowed" && return 1;
-            fi;
-        fi;
-    done;
-    command cursor "$@"
-}
-
-# check for secrets in a git repo
-function check_secrets() {
-    # Function body goes here
-    echo "Checking git status..."
-    git status
-    echo "Checking git ignore..."
-    git check-ignore -v **/**/*
-    echo "Checking tfstate..."
-    find . -name 'terraform.tfstate' -exec cat {} \;
-    echo "Checking Python settings..."
-    find . -name 'settin*py' -exec cat {} \;
-    echo "Checking Appsettings..."
-    find . -name 'appset*' -exec cat {} \;
-}
-
-# activate poetry env
-function poactivate() {
-    . $(poetry env info | grep Path | head -1 | ggrep -E -o '\/.*$')/bin/activate
 }
 
 # stub update function for macos environments where not present

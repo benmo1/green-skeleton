@@ -4,7 +4,7 @@
 
 To build:
 
-`. ./build.sh`
+`./build.sh`
 
 This will copy the aliases from components/ into ~/.bm_bash and source them individually in your ~/.bashrc.
 
@@ -14,7 +14,7 @@ An empty ~/.bash_profile and ~/.bashrc will be created if they are not present.
 
 To enable auto build:
 
-`. ./build.sh 1`
+`./build.sh 1`
 
 Every time .bashrc is run (rate limited to 1 minute), this repo will be asynchronously checked for updates and rebuild if there are any changes.
 
