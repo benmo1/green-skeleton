@@ -1,0 +1,5 @@
+{
+  "name": "Bash",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu"
+}
+
