@@ -11,7 +11,7 @@ function sssh () {
         return
     fi
 
-    hosts=`egrep '^\s*\bHost\b\s+.*$' $config_file | awk '{$1=$1}1' | cut -d' ' -f 2- | grep ${1-''}`
+    hosts=`ggrep -E '^\s*\bHost\b\s+.*$' $config_file | awk '{$1=$1}1' | cut -d' ' -f 2- | grep ${1-''}`
 
     if [[ -z $hosts ]] ; then
         echo "No hosts in $config_file!"

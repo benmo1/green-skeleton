@@ -76,7 +76,7 @@ function m() {
 # Track branch changes when doing git checkout
 # This enables ghist to show recently checkout branches
 function co() {
-    checkout_line=`git checkout $* 2>&1 | egrep "Switched to.*branch.*'.*'"`; # first * caters for new branches
+    checkout_line=`git checkout $* 2>&1 | ggrep -E "Switched to.*branch.*'.*'"`; # first * caters for new branches
     branch=`echo ${checkout_line##*' '} | cut -d"'" -f2`; # last item on the line, remove the enclosing quotes
     git_repo=`nearest_git_repo`;
     echo "$git_repo $branch" >> $GIT_HIST_DIR/$GIT_HIST_FILE;

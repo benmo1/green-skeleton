@@ -9,7 +9,7 @@ alias svim='vim ~/.ssh/config'
 
 # Make an alias to cd to the current directory
 function mkcdalias () {
-    dirname=`pwd | egrep -oh '[^\/\0]+$'`
+    dirname=`pwd | ggrep -E -oh '[^\/\0]+$'`
     aliasname="cd$dirname"
     occurances=`grep -c "alias $aliasname" ~/.bashrc`
     if [[ $occurances -gt "0" ]] ; then
@@ -141,7 +141,7 @@ function check_secrets() {
 
 # activate poetry env
 function poactivate() {
-    . $(poetry env info | grep Path | head -1 | egrep -o '\/.*$')/bin/activate
+    . $(poetry env info | grep Path | head -1 | ggrep -E -o '\/.*$')/bin/activate
 }
 
 # stub update function for macos environments where not present

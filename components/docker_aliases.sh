@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-alias dkc='docker kill $(docker ps -q)'
-alias drc='docker rm $(docker ps -a -q)'
-alias drv='docker volume rm $(docker volume ls -q)'
+alias dkc='docker kill $(docker compose ps -q)'
+alias drc='docker rm $(docker compose ps -a -q)'
+alias drv='docker volume rm $(docker compose volume ls -q)'
 alias dres='dkc ; drc && drv && dcu'
 alias dfresh='dkc && drc && drv'
 alias dri='docker rmi $(docker images -q)'
